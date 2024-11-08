@@ -78,7 +78,6 @@ plan-permissions:
   - clone
   - admin
   - view-configuration
-  - create-plan-branch
 - roles:
   - anonymous
   permissions:
