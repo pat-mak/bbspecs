@@ -39,7 +39,6 @@ repositories:
     user: pat-mak
     command-timeout-minutes: '180'
     lfs: false
-    webhook-enabled: false
     verbose-logs: false
     use-shallow-clones: false
     cache-on-agents: true
@@ -58,11 +57,6 @@ dependencies:
   enabled-for-branches: true
   block-strategy: none
   plans: []
-other:
-  concurrent-build-plugin:
-    number-of-concurrent-builds: system-default
-    execution-strategy: block-triggering
-  force-stop-build: true
 ---
 version: 2
 plan:
