@@ -1,0 +1,92 @@
+--
+version: 2
+plan:
+  project-key: BBB
+  key: SPEC
+  name: Bamboo Specs Plan
+  description: Plan created from Bamboo Java Specs
+stages:
+- Stage 1:
+    manual: false
+    final: false
+    jobs:
+    - Job 1
+Job 1:
+  key: JOB1
+  tasks:
+  - checkout:
+      repository: pat-mak-spring
+      force-clean-build: false
+  - script:
+      interpreter: SHELL
+      scripts:
+      - mkdir target; echo 'hello world' > target/console.out; cat target/console.out
+  artifacts:
+  - name: Build results
+    location: target
+    pattern: '**/*'
+    shared: false
+    required: false
+  requirements:
+  - Linux
+  artifact-subscriptions: []
+repositories:
+- pat-mak-spring:
+    type: github
+    base-url: https://github.com
+    repository: pat-mak/spring-demo
+    branch: main
+    user: pat-mak
+    command-timeout-minutes: '180'
+    lfs: false
+    webhook-enabled: false
+    verbose-logs: false
+    use-shallow-clones: false
+    cache-on-agents: true
+    submodules: false
+    ssh-key-applies-to-submodules: false
+    fetch-all: false
+triggers: []
+branches:
+  create: manually
+  delete: never
+  link-to-jira: true
+notifications: []
+labels: []
+dependencies:
+  require-all-stages-passing: false
+  enabled-for-branches: true
+  block-strategy: none
+  plans: []
+other:
+  concurrent-build-plugin:
+    number-of-concurrent-builds: system-default
+    execution-strategy: block-triggering
+  force-stop-build: true
+---
+version: 2
+plan:
+  key: BBB-SPEC
+plan-permissions:
+- roles:
+  - logged-in
+  permissions:
+  - view
+  - build
+- users:
+  - admin
+  groups:
+  - bamboo-admin
+  permissions:
+  - view
+  - edit
+  - build
+  - clone
+  - admin
+  - view-configuration
+  - create-plan-branch
+- roles:
+  - anonymous
+  permissions:
+  - view
+...
